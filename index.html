@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Prompt Architect (A.P.A.)</title>
+    <!-- Laad Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212; /* Donkergrijs/zwart */
+            color: #e0e0e0; /* Lichte tekstkleur */
+        }
+        .container {
+            max-width: 1000px;
+        }
+        .section-title {
+            color: #bb86fc; /* Paarse accentkleur (Material Design Dark) */
+            font-weight: 700;
+        }
+        .card {
+            border: 1px solid #333333;
+            transition: all 0.2s;
+            cursor: pointer;
+            position: relative;
+        }
+        .card:hover {
+            border-color: #555555;
+        }
+        .selected {
+            background-color: #2c003e; /* Donkerder paars */
+            border-color: #bb86fc;
+            box-shadow: 0 0 8px rgba(187, 134, 252, 0.6);
+        }
+        .prompt-output {
+            min-height: 120px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            background-color: #1e1e1e;
+        }
+        /* Alle slider-gerelateerde stijlen zijn verwijderd */
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div id="app" class="container mx-auto">
+        <header class="text-center mb-12 p-6 rounded-xl bg-[#1e1e1e] shadow-2xl">
+            <h1 class="text-4xl font-extrabold text-[#bb86fc] mb-2">Advanced Prompt Architect (A.P.A.)</h1>
+            <p class="text-lg text-gray-400">Creëer krachtige prompts met eenvoudige selectie en negatieve filters.</p>
+        </header>
+
+        <!-- 1. Kernonderwerp -->
+        <section class="mb-10 p-6 bg-[#1e1e1e] rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold section-title mb-4">1. Kernonderwerp</h2>
+            <p class="text-gray-400 mb-3">Het centrale object, de actie of het basisconcept.</p>
+            <textarea id="subjectInput" rows="2" class="w-full p-3 rounded-lg bg-[#252525] border border-[#333333] focus:ring-[#bb86fc] focus:border-[#bb86fc] text-white" placeholder="Bijvoorbeeld: Een man die een neon-sigaar rookt in een futuristische bar"></textarea>
+        </section>
+
+        <h2 class="text-center text-3xl font-bold my-8 text-gray-300">DYNAMISCHE INSTELLINGEN</h2>
+
+        <!-- Dynamische Categorieën Container -->
+        <div id="dynamicSections">
+            
+            <!-- 2. Stijl & Medium -->
+            <section class="mb-10 p-6 bg-[#1e1e1e] rounded-xl shadow-lg">
+                <h2 class="text-2xl font-semibold section-title mb-4">2. Stijl & Medium</h2>
+                <p class="text-gray-400 mb-4">De artistieke uitstraling, techniek of inspiratie. (Meerdere selecties mogelijk)</p>
+                <div id="styleMediumContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                    <!-- BESTAANDE OPTIES -->
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="concept art">
+                        <p class="font-bold text-white">Concept Art</p>
+                        <p class="text-sm text-gray-400 mt-2">Visuele ontwikkeling, gedetailleerde schetsstijl.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="by beeple">
+                        <p class="font-bold text-white">By Beeple</p>
+                        <p class="text-sm text-gray-400 mt-2">Digitaal, surrealistisch, popcultuur.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="digital painting">
+                        <p class="font-bold text-white">Digital Painting</p>
+                        <p class="text-sm text-gray-400 mt-2">Schilderachtige, vloeiende digitale penseelstreken.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="low-poly 3D">
+                        <p class="font-bold text-white">Low-Poly 3D</p>
+                        <p class="text-sm text-gray-400 mt-2">Eenvoudige geometrie, minimalistische esthetiek.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="vaporwave aesthetics">
+                        <p class="font-bold text-white">Vaporwave</p>
+                        <p class="text-sm text-gray-400 mt-2">Retro jaren '80, pastelkleuren, futuristisch.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="oil painting">
+                        <p class="font-bold text-white">Olieverf</p>
+                        <p class="text-sm text-gray-400 mt-2">Rijke texturen, klassieke schilderkunststijl.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="steampunk">
+                        <p class="font-bold text-white">Steampunk</p>
+                        <p class="text-sm text-gray-400 mt-2">Victoriaanse machines, koper en tandwielen.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="isometric view">
+                        <p class="font-bold text-white">Isometrisch</p>
+                        <p class="text-sm text-gray-400 mt-2">Driedimensionaal, perfect voor landschappen/kamers.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="hyperrealistic">
+                        <p class="font-bold text-white">Hyperrealistisch</p>
+                        <p class="text-sm text-gray-400 mt-2">Extreem gedetailleerd, lijkt op een foto.</p>
+                    </div>
+
+                    <!-- NIEUWE OPTIES GEBASEERD OP SCREENSHOT -->
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="pixelart">
+                        <p class="font-bold text-white">Pixelart</p>
+                        <p class="text-sm text-gray-400 mt-2">Retro videogame esthetiek.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="watercolor texture">
+                        <p class="font-bold text-white">Aquarel</p>
+                        <p class="text-sm text-gray-400 mt-2">Zachte, vloeiende, transparante kleuren.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="dreamy anime">
+                        <p class="font-bold text-white">Dreamy Anime</p>
+                        <p class="text-sm text-gray-400 mt-2">Zachte, dromerige, Japanse animatiestijl.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="bold flat vector">
+                        <p class="font-bold text-white">Bold Flat</p>
+                        <p class="text-sm text-gray-400 mt-2">Strakke lijnen, platte kleuren, grafische vectorstijl.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="risoprint">
+                        <p class="font-bold text-white">Risoprint</p>
+                        <p class="text-sm text-gray-400 mt-2">Textuur, overprinten, korrelig drukwerk.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="inkprint">
+                        <p class="font-bold text-white">Inkprint</p>
+                        <p class="text-sm text-gray-400 mt-2">Hoge contrasten, gestileerd, drukinkt look.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="styleMedium" data-value="cross processed">
+                        <p class="font-bold text-white">Cross Processed</p>
+                        <p class="text-sm text-gray-400 mt-2">Filmisch, onnatuurlijke kleurenverschuivingen.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Atmosfeer & Emotie -->
+            <section class="mb-10 p-6 bg-[#1e1e1e] rounded-xl shadow-lg">
+                <h2 class="text-2xl font-semibold section-title mb-4">3. Atmosfeer & Emotie</h2>
+                <p class="text-gray-400 mb-4">De stemming, kleurpalet of algemene sfeer. (Meerdere selecties mogelijk)</p>
+                <div id="atmosphereEmotionContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                    <!-- OORSPRONKELIJKE OPTIES -->
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="atmosphereEmotion" data-value="cinematic lighting">
+                        <p class="font-bold text-white">Cinematic Lighting</p>
+                        <p class="text-sm text-gray-400 mt-2">Hoge contrasten, filmische belichting.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="atmosphereEmotion" data-value="dark moody atmosphere">
+                        <p class="font-bold text-white">Dark Moody</p>
+                        <p class="text-sm text-gray-400 mt-2">Somber, zware schaduwen, mysterieus.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="atmosphereEmotion" data-value="vibrant colors">
+                        <p class="font-bold text-white">Vibrant Colors</p>
+                        <p class="text-sm text-gray-400 mt-2">Levendige, verzadigde kleuren.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="atmosphereEmotion" data-value="sense of loneliness">
+                        <p class="font-bold text-white">Loneliness</p>
+                        <p class="text-sm text-gray-400 mt-2">Gevoel van eenzaamheid of isolement.</p>
+                    </div>
+                    <!-- NIEUWE OPTIES -->
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="atmosphereEmotion" data-value="neon noir">
+                        <p class="font-bold text-white">Neon Noir</p>
+                        <p class="text-sm text-gray-400 mt-2">Dystopisch, donker met felle, natte neonlichten.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="atmosphereEmotion" data-value="minimalist background">
+                        <p class="font-bold text-white">Minimalistisch</p>
+                        <p class="text-sm text-gray-400 mt-2">Eenvoudig, strakke lijnen, focus op de hoofdzaak.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="atmosphereEmotion" data-value="ethereal light">
+                        <p class="font-bold text-white">Etherisch Licht</p>
+                        <p class="text-sm text-gray-400 mt-2">Hemels, zacht, doorschijnend en mystiek.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="atmosphereEmotion" data-value="warm volumetric glow">
+                        <p class="font-bold text-white">Volumetrische Gloed</p>
+                        <p class="text-sm text-gray-400 mt-2">Warm licht dat de lucht of ruimte vult.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="atmosphereEmotion" data-value="dystopian">
+                        <p class="font-bold text-white">Dystopisch</p>
+                        <p class="text-sm text-gray-400 mt-2">Somber, futuristisch, vervallen sfeer.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="atmosphereEmotion" data-value="warm cozy">
+                        <p class="font-bold text-white">Warm Cozy</p>
+                        <p class="text-sm text-gray-400 mt-2">Uitnodigend, zacht, comfortabel.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="atmosphereEmotion" data-value="filmlike landscapes">
+                        <p class="font-bold text-white">Filmlike Landscapes</p>
+                        <p class="text-sm text-gray-400 mt-2">Brede, epische landschappen.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Technische Specificaties -->
+            <section class="mb-10 p-6 bg-[#1e1e1e] rounded-xl shadow-lg">
+                <h2 class="text-2xl font-semibold section-title mb-4">4. Technische Specificaties</h2>
+                <p class="text-gray-400 mb-4">Beeldkwaliteit en geavanceerde rendering technieken. (Meerdere selecties mogelijk)</p>
+                <div id="techSpecsContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                    <!-- OORSPRONKELIJKE OPTIES -->
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="techSpecs" data-value="4k resolution">
+                        <p class="font-bold text-white">4K Resolution</p>
+                        <p class="text-sm text-gray-400 mt-2">Ultra-hoge resolutie en detail.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="techSpecs" data-value="Unreal Engine 5">
+                        <p class="font-bold text-white">Unreal Engine 5</p>
+                        <p class="text-sm text-gray-400 mt-2">Hyperrealistische 3D rendering.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="techSpecs" data-value="volumetric lighting">
+                        <p class="font-bold text-white">Volumetric Lighting</p>
+                        <p class="text-sm text-gray-400 mt-2">Lichtstralen, diepte en sfeer door mist/damp.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="techSpecs" data-value="bokeh">
+                        <p class="font-bold text-white">Bokeh</p>
+                        <p class="text-sm text-gray-400 mt-2">Esthetische vervaging van de achtergrond (onscherpte).</p>
+                    </div>
+                    <!-- NIEUWE OPTIES -->
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="techSpecs" data-value="Octane Render">
+                        <p class="font-bold text-white">Octane Render</p>
+                        <p class="text-sm text-gray-400 mt-2">Fotorealistische, path-traced rendering.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="techSpecs" data-value="Zbrush sculpture">
+                        <p class="font-bold text-white">Zbrush Sculptuur</p>
+                        <p class="text-sm text-gray-400 mt-2">Digitale kleimodellering, organisch, hoog polygoon.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="techSpecs" data-value="tilt-shift effect">
+                        <p class="font-bold text-white">Tilt-Shift</p>
+                        <p class="text-sm text-gray-400 mt-2">Maakt objecten op schaal lijken op miniaturen.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="techSpecs" data-value="sharp focus">
+                        <p class="font-bold text-white">Scherpe Focus</p>
+                        <p class="text-sm text-gray-400 mt-2">Kristalheldere, gedefinieerde randen.</p>
+                    </div>
+                    <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="techSpecs" data-value="depth of field">
+                        <p class="font-bold text-white">Diepte van Veld</p>
+                        <p class="text-sm text-gray-400 mt-2">Gebruik van onscherpte om de focus te manipuleren.</p>
+                    </div>
+                </div>
+            </section>
+        </div> <!-- Einde Dynamic Sections -->
+        
+        <!-- 5. Beeldverhouding (NIEUWE SECTIE) -->
+        <section class="mb-10 p-6 bg-[#1e1e1e] rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold section-title mb-4">5. Beeldverhouding (--ar)</h2>
+            <p class="text-gray-400 mb-4">Bepaal de verhouding tussen breedte en hoogte van de afbeelding. (Eén selectie mogelijk)</p>
+            <div id="aspectRatioContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="aspectRatio" data-value="1:1">
+                    <p class="font-bold text-white">Vierkant (1:1)</p>
+                    <p class="text-sm text-gray-400 mt-2">Perfecte balans, vaak gebruikt voor profielfoto's.</p>
+                </div>
+                <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="aspectRatio" data-value="3:4">
+                    <p class="font-bold text-white">Portret (3:4)</p>
+                    <p class="text-sm text-gray-400 mt-2">Hoger dan breed, ideaal voor staande onderwerpen.</p>
+                </div>
+                <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between selected" data-category="aspectRatio" data-value="16:9">
+                    <p class="font-bold text-white">Landschap (16:9)</p>
+                    <p class="text-sm text-gray-400 mt-2">Breed scherm, filmisch en standaard.</p>
+                </div>
+                <div class="card p-4 rounded-xl cursor-pointer bg-[#252525] flex flex-col justify-between" data-category="aspectRatio" data-value="21:9">
+                    <p class="font-bold text-white">Ultrabreed (21:9)</p>
+                    <p class="text-sm text-gray-400 mt-2">Zeer breed, panoramisch effect.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 6. Geselecteerde Opties Overzicht -->
+        <section class="mb-10 p-6 bg-[#1e1e1e] rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold section-title mb-4">6. Geselecteerde Opties Overzicht</h2>
+            <div id="selectedOptionsSummary" class="text-gray-400">
+                <p>Nog geen opties geselecteerd uit de dynamische instellingen.</p>
+            </div>
+        </section>
+
+        <!-- 7. Negatieve Prompting -->
+        <section class="mb-10 p-6 bg-[#1e1e1e] rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold section-title mb-4">7. Negatieve Prompt (Wat te Vermijden)</h2>
+            <p class="text-gray-400 mb-3">Voeg trefwoorden toe die de AI niet mag gebruiken. (Gescheiden door komma's).</p>
+            <textarea id="negativeInput" rows="2" class="w-full p-3 rounded-lg bg-[#252525] border border-[#333333] focus:ring-[#bb86fc] focus:border-[#bb86fc] text-white" placeholder="Bijvoorbeeld: bad hands, blurry, low quality, cropped, watermark"></textarea>
+        </section>
+
+        <!-- Resultaat Sectie -->
+        <section class="p-6 bg-[#1e1e1e] rounded-xl shadow-lg">
+            <button id="generateButton" class="w-full bg-[#bb86fc] hover:bg-[#cf9dff] text-black font-extrabold py-3 px-4 rounded-xl mb-6 transition-colors shadow-lg">
+                Genereer Geavanceerde Prompt
+            </button>
+
+            <h2 class="text-xl font-semibold text-white mb-3">Jouw Ultieme Prompt:</h2>
+            <div id="promptOutput" class="prompt-output p-4 rounded-lg border border-[#333333] text-gray-300 text-base overflow-auto">
+                Vul je onderwerp in en maak je keuzes om te beginnen...
+            </div>
+
+            <button id="copyButton" class="mt-4 w-full bg-[#555] hover:bg-[#777] text-white font-bold py-2 px-4 rounded-xl transition-colors text-sm hidden">
+                Kopieer Prompt
+            </button>
+        </section>
+    </div>
+
+    <script>
+        // Opslag voor geselecteerde kaarten en aspect ratio.
+        const selections = {
+            styleMedium: {},
+            atmosphereEmotion: {},
+            techSpecs: {},
+            aspectRatio: '16:9', // Standaardwaarde voor aspect ratio
+        };
+
+        // De standaard --v parameter (hardcoded, maar verplaatst buiten de aspectRatio selectie)
+        const mandatoryVParam = ' --v 5.2'; 
+
+        const subjectInput = document.getElementById('subjectInput');
+        const negativeInput = document.getElementById('negativeInput');
+        const promptOutput = document.getElementById('promptOutput');
+        const generateButton = document.getElementById('generateButton');
+        const copyButton = document.getElementById('copyButton');
+        const selectedOptionsSummary = document.getElementById('selectedOptionsSummary');
+
+
+        // Initialiseer de Aspect Ratio bij het opstarten, gebaseerd op de HTML default
+        function initializeAspectRatio() {
+            // Dit is een 'single-select' categorie, dus we zorgen ervoor dat de default in de JS data staat
+            const defaultCard = document.querySelector('#aspectRatioContainer .card.selected');
+            if (defaultCard) {
+                selections.aspectRatio = defaultCard.dataset.value;
+            }
+        }
+
+        // Initialiseer met de huidige selecties
+        function updatePrompt() {
+            const promptParts = [];
+            
+            // 1. Kernonderwerp
+            const subject = subjectInput.value.trim();
+            if (subject) {
+                promptParts.push(subject);
+            }
+
+            // 2, 3, 4. Stijl, Atmosfeer, Techniek (ZONDER gewichten)
+            const categories = ['styleMedium', 'atmosphereEmotion', 'techSpecs'];
+            
+            categories.forEach(category => {
+                const sortedValues = Object.keys(selections[category] || {}).sort();
+                
+                sortedValues.forEach(value => {
+                    promptParts.push(value);
+                });
+            });
+
+            let finalPrompt = promptParts.join(', ');
+
+            // 5. Beeldverhouding (--ar) en V-parameter
+            if (finalPrompt.trim()) {
+                // Voeg de samengestelde prompt toe aan de output
+                finalPrompt += ` --ar ${selections.aspectRatio}${mandatoryVParam}`;
+            }
+
+            // 6. Negatieve Prompt
+            const negativePrompt = negativeInput.value.trim();
+            if (negativePrompt) {
+                finalPrompt += ` --no ${negativePrompt}`;
+            }
+
+            // Update de uitvoer en knop
+            if (finalPrompt.trim()) {
+                promptOutput.textContent = finalPrompt.trim();
+                copyButton.classList.remove('hidden');
+            } else {
+                promptOutput.textContent = 'Vul je onderwerp in en maak je keuzes om te beginnen...';
+                copyButton.classList.add('hidden');
+            }
+        }
+
+        // Functie om de geselecteerde opties weer te geven in de samenvatting
+        function displaySelectedOptions() {
+            let html = '';
+            const categories = {
+                styleMedium: 'Stijl & Medium',
+                atmosphereEmotion: 'Atmosfeer & Emotie',
+                techSpecs: 'Technische Specificaties'
+            };
+            let hasSelections = false;
+
+            for (const categoryKey in categories) {
+                const terms = selections[categoryKey];
+                if (terms && Object.keys(terms).length > 0) {
+                    hasSelections = true;
+                    html += `<h3 class="text-white font-semibold mt-3 mb-1">${categories[categoryKey]}</h3>`;
+                    html += '<div class="flex flex-wrap gap-2">';
+                    
+                    for (const value in terms) {
+                        html += `
+                            <span class="px-3 py-1 rounded-full text-sm font-medium bg-[#bb86fc]/20 text-white border border-[#bb86fc]">
+                                ${value}
+                            </span>
+                        `;
+                    }
+                    html += '</div>';
+                }
+            }
+            
+            // Toon de Aspect Ratio in de samenvatting
+            html += `<h3 class="text-white font-semibold mt-3 mb-1">Beeldverhouding</h3>`;
+            html += `<span class="px-3 py-1 rounded-full text-sm font-medium bg-[#bb86fc]/20 text-white border border-[#bb86fc]">${selections.aspectRatio}</span>`;
+
+            if (hasSelections || selections.aspectRatio) {
+                selectedOptionsSummary.innerHTML = html;
+            } else {
+                selectedOptionsSummary.innerHTML = '<p class="text-gray-400">Nog geen opties geselecteerd uit de dynamische instellingen.</p>';
+            }
+        }
+
+        // Handler voor het selecteren van kaarten
+        function handleCardClick(event) {
+            const card = event.currentTarget;
+            const category = card.dataset.category;
+            const value = card.dataset.value;
+
+            if (category === 'aspectRatio') {
+                // 1. Aspect Ratio (Single Select Logic)
+                const container = document.getElementById('aspectRatioContainer');
+                container.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                selections.aspectRatio = value;
+            } else {
+                // 2. Stijl/Atmosfeer/Techniek (Multi Select Toggle Logic)
+                if (!selections[category]) {
+                    selections[category] = {};
+                }
+
+                const isSelected = !!selections[category][value];
+
+                if (isSelected) {
+                    // Deselecteer: Verwijder term
+                    delete selections[category][value];
+                    card.classList.remove('selected');
+                } else {
+                    // Selecteer: Voeg term toe
+                    selections[category][value] = true; 
+                    card.classList.add('selected');
+                }
+            }
+
+            // Update onmiddellijk de prompt en de samenvatting
+            updatePrompt(); 
+            displaySelectedOptions(); 
+        }
+
+        // Event listener voor het invoerveld van het onderwerp en negatieve prompt
+        subjectInput.addEventListener('input', updatePrompt);
+        negativeInput.addEventListener('input', updatePrompt);
+        generateButton.addEventListener('click', updatePrompt);
+
+        // Voeg event listeners toe aan alle selecteerbare kaarten
+        document.querySelectorAll('.card[data-category]').forEach(card => {
+            card.addEventListener('click', handleCardClick);
+        });
+
+        // Event listener voor de Kopieer Knop
+        copyButton.addEventListener('click', () => {
+            const textToCopy = promptOutput.textContent;
+            
+            // Gebruik de veilige methode voor kopiëren
+            const tempInput = document.createElement('textarea');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            
+            try {
+                document.execCommand('copy');
+                copyButton.textContent = 'Gekopieerd!';
+            } catch (err) {
+                copyButton.textContent = 'Fout bij kopiëren';
+            }
+            
+            document.body.removeChild(tempInput);
+
+            // Reset knoptekst na een korte vertraging
+            setTimeout(() => {
+                copyButton.textContent = 'Kopieer Prompt';
+            }, 2000);
+        });
+
+        // Eerste keer de prompt en samenvatting updaten bij het laden
+        initializeAspectRatio();
+        updatePrompt();
+        displaySelectedOptions();
+    </script>
+
+</body>
+</html>
